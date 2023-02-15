@@ -25,8 +25,8 @@ def is_happy_number(num_input):
             return str(num_input) + ' is happy'
         temp = 0
 
-# test = is_happy_number(23)
-# print(test)
+test = is_happy_number(23)
+print(test)
 
 
 #Task 2: Prime Numbers
@@ -53,11 +53,11 @@ def find_primes(num_input):
             results.append(x)
     return results
 
-# test = find_primes(1000)
-# print(test)
+test = find_primes(1000)
+print(test)
 
 #The prime numbers from 1 to 100 are: 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
-#    output                          [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+#    my test output                  [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
 
 
 
@@ -73,19 +73,56 @@ def find_primes(num_input):
 #do a while loop that has a variable to keep track of current number addition, and add the two others together
 #works, now try with starting number
 #loop a set number of times, maybe 10, so no infinite loop
+#have to write out sequence (can't derive from a random number), so maybe solution is to give a starting number, and run 
+#   fibonacci sequence up to and past that number, limited so not an infinite loop
 
-def fibonacci_nums(num_input):
+def ten_fibonacci_nums(num_input):
     x1 = 0
     x2 = 1
-    result =[1]
-    fib_num = 1
-    while fib_num < num_input:
+    fib_num = 0
+    count = 0
+    result =[]
+    if num_input == 1:
+        result.append(1)
+        count += 1
+    while count < 10:
         fib_num = x1 + x2
-        result.append(fib_num)
         x1 = x2
         x2 = fib_num
+        if fib_num >= num_input:
+            result.append(fib_num)
+            count += 1
     return result
 
-test = fibonacci_nums(9)
+test = ten_fibonacci_nums(1)
 print(test)
 
+
+
+
+#Bonus palindrome check with spaces, punctuation
+#check index to halfway point 
+#   A man, a plan, a canal: PANAMA
+#take input and lower everything so no casing issues
+# loop through and take out everything that isnt' a letter or number 
+#comopare up to halfway with index starting at opposite ends to check every character
+#once through loop, if nothing found, must be a palindrome and return True 
+
+def palindrome_minus_punc(string_input):
+    user_input = string_input.lower()
+    alphanum_string =''
+    for char in range(len(string_input)):
+        if user_input[char].isalnum(): 
+            alphanum_string += user_input[char]
+    print(alphanum_string)
+    halfway = int(len(alphanum_string)/2) + 1
+    for i in range(halfway):
+        if alphanum_string[i] != alphanum_string[-1 - i]:
+            print("Is not a palindrome")
+            return False
+        
+    print("Yes, it is a palindrome")
+    return True
+
+
+palindrome_minus_punc("  A man, a plan, a canal: PANAMA")
